@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="index.css" />
+</head>
+<body>
+    <div class="box">
+        <div class="content_right_newcourse_design_barc">
+            <div class="content_right_newcourse_design_bara_l_diff">内容一</div>
+            <div class="content_right_newcourse_design_barc_r">
+                <div style="width: 600px;"></div>
+                <div class="content_right_newcourse_design_barc_r_text this_title" id="one" style="overflow-y: auto;"></div>
+            </div>
+        </div>
+
+        <div class="content_right_newcourse_design_barc">
+            <div class="content_right_newcourse_design_bara_l_diff">内容二</div>
+            <div class="content_right_newcourse_design_barc_r">
+                <div style="width: 600px;"></div>
+                <div class="content_right_newcourse_design_barc_r_text this_title" id="two" style="overflow-y: auto;"></div>
+            </div>
+            <div class="content_right_newcourse_design_barc_yulan">预览</div>
+        </div>
+    </div>
+
+    <!--笼罩层-->
+    <div class="bg hide"></div>
+    <!--内容预览弹窗-->
+    <div class="yulanPop hide">
+        <span class="yulanPop_close">×</span>
+        <div class="yulanPop_con"></div>
+    </div>
+</body>
+
+<!--注意引入顺序-->
+<script type="text/javascript" src="jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="ueditor/ueditor.catalog.js"></script>
+<script type="text/javascript" src="ueditor/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="index.js"></script>
+<script>
+    var ueditor = null;
+    var editType = ''; //编辑器
+    var now = null; //当前点击的
+
+    //点击内容一编辑区
+    $("#one").click(function(){
+        changeModel('editWindow', 'one');
+    });
+
+    //点击内容二编辑区
+    $("#two").click(function(){
+        changeModel('editWindow', 'two');
+    });
+
+    //预览
+    $(".content_right_newcourse_design_barc_yulan").click(function(){
+        $(".bg").show();
+        $(".yulanPop").show();
+    });
+
+    //关闭预览
+    $(".yulanPop_close").click(function(){
+        $(".bg").hide();
+        $(".yulanPop").hide();
+    });
+
+    //点击编辑器外部触发销毁编辑器
+    $(document).click(function(e){
+        var target = $(e.target);
+        if($('.edui-editor') && target.closest('.edui-editor').length == 0 && target.closest('.edui-popup-content').length == 0 && target.closest('.edui-default').length == 0){
+            ueditor && destroyEditor();
+        }
+    });
+
+
+    //注意：由于是在本地运行，所以会有一些报错，以及编辑器的上传功能无法使用
+
+</script>
+
+</html>
